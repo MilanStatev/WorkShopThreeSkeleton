@@ -19,6 +19,6 @@ public class ListVehiclesCommand implements Command {
             return "There are no registered journeys.";
         }
 
-        return ListingHelpers.vehiclesToString(vehicles);
+        return ListingHelpers.elementsToString(vehicles);
     }
 }

@@ -3,6 +3,7 @@ package com.company.oop.agency.core;
 import com.company.oop.agency.exceptions.ElementNotFoundException;
 import com.company.oop.agency.models.JourneyImpl;
 import com.company.oop.agency.models.TicketImpl;
+import com.company.oop.agency.models.contracts.Identifiable;
 import com.company.oop.agency.models.contracts.Journey;
 import com.company.oop.agency.models.contracts.Ticket;
 import com.company.oop.agency.models.vehicles.AirplaneImpl;
@@ -46,35 +47,17 @@ public class AgencyRepositoryImpl implements AgencyRepository {
 
     @Override
     public Vehicle findVehicleById(int id) {
-        for (Vehicle vehicle : getVehicles()) {
-            if (vehicle.getId() == id) {
-                return vehicle;
-            }
-        }
-
-        throw new ElementNotFoundException(String.format("No record with ID %d", id));
+        return findElementById(getVehicles(), id);
     }
 
     @Override
     public Journey findJourneyById(int id) {
-        for (Journey journey : getJourneys()) {
-            if (journey.getId() == id) {
-                return journey;
-            }
-        }
-
-        throw new ElementNotFoundException(String.format("No record with ID %d", id));
+        return findElementById(getJourneys(), id);
     }
 
     @Override
     public Ticket findTicketById(int id) {
-        for (Ticket ticket : getTickets()) {
-            if (ticket.getId() == id) {
-                return ticket;
-            }
-        }
-
-        throw new ElementNotFoundException(String.format("No record with ID %d", id));
+        return findElementById(getTickets(), id);
     }
 
     @Override
@@ -113,5 +96,12 @@ public class AgencyRepositoryImpl implements AgencyRepository {
     }
 
     // Advanced task: Implement the following generic method that looks for an item by id.
-    // private <T extends {{?}}> T findElementById(List<T> elements, int id) { }
+     private <T extends Identifiable> T findElementById(List<T> elements, int id) {
+         for (T element : elements) {
+             if (element.getId() == id) {
+                 return element;
+             }
+         }
+         throw new ElementNotFoundException(String.format("No record with ID %d", id));
+     }
 }
