@@ -1,5 +1,16 @@
 package com.company.oop.agency.models.vehicles;
 
 public enum VehicleType {
-    // TODO
+    LAND ("LAND"), AIR ("AIR"), SEA ("SEA");
+
+    private final String value;
+
+    VehicleType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

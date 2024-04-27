@@ -6,9 +6,11 @@ public class ValidationHelper {
 
     public static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d, Received: %d";
 
-    public static void validateValueInRange(double value, double min, double max, String errorMessage) {
+    public static <T extends Number> void validateValueInRange(T value, T min, T max, String errorMessage) {
         // Needs to check if value > min and if value < max
-        throw new UnsupportedOperationException("Not implemented yet.");
+        if (value.doubleValue() < min.doubleValue() || value.doubleValue() > max.doubleValue()) {
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 
     public static void validateStringLength(String stringToValidate, int minLength, int maxLength, String errorMessage) {
