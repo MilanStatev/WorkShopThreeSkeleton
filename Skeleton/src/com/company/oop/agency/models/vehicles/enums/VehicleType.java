@@ -1,4 +1,4 @@
-package com.company.oop.agency.models.vehicles;
+package com.company.oop.agency.models.vehicles.enums;
 
 public enum VehicleType {
     LAND ("LAND"), AIR ("AIR"), SEA ("SEA");

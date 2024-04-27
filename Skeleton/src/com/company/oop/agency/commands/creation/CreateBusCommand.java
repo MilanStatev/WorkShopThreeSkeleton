@@ -9,17 +9,11 @@ import com.company.oop.agency.utils.ValidationHelper;
 
 import java.util.List;
 
-public class CreateBusCommand implements Command {
+public class CreateBusCommand extends CreateVehicleBaseCommand {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
-    private final AgencyRepository agencyRepository;
-
-    private int passengerCapacity;
-    private double pricePerKilometer;
 
     public CreateBusCommand(AgencyRepository agencyRepository) {
-        this.agencyRepository = agencyRepository;
+        super(agencyRepository);
     }
 
     @Override
@@ -28,14 +22,9 @@ public class CreateBusCommand implements Command {
 
         parseParameters(parameters);
 
-        Bus createdBus = agencyRepository.createBus(passengerCapacity, pricePerKilometer);
+        Bus createdBus = getAgencyRepository().createBus(getPassengerCapacity(), getPricePerKilometer());
 
         return String.format(CommandsConstants.VEHICLE_CREATED_MESSAGE, createdBus.getId());
-    }
-
-    private void parseParameters(List<String> parameters) {
-        pricePerKilometer = ParsingHelpers.tryParseDouble(parameters.get(1), "price");
-        passengerCapacity = ParsingHelpers.tryParseInteger(parameters.get(0), "passenger capacity");
     }
 
 }

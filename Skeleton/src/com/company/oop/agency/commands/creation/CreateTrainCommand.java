@@ -9,18 +9,13 @@ import com.company.oop.agency.utils.ValidationHelper;
 
 import java.util.List;
 
-public class CreateTrainCommand implements Command {
+public class CreateTrainCommand extends CreateVehicleBaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-
-    private final AgencyRepository agencyRepository;
-
     private int cartsCount;
-    private int passengerCapacity;
-    private double pricePerKilometer;
 
     public CreateTrainCommand(AgencyRepository agencyRepository) {
-        this.agencyRepository = agencyRepository;
+        super(agencyRepository);
     }
 
     public String execute(List<String> parameters) {
@@ -28,14 +23,14 @@ public class CreateTrainCommand implements Command {
 
         parseParameters(parameters);
 
-        Train createdTrain = agencyRepository.createTrain(passengerCapacity, pricePerKilometer, cartsCount);
+        Train createdTrain = getAgencyRepository().createTrain(getPassengerCapacity(), getPricePerKilometer(), cartsCount);
 
         return String.format(CommandsConstants.VEHICLE_CREATED_MESSAGE, createdTrain.getId());
     }
 
-    private void parseParameters(List<String> parameters) {
-        passengerCapacity = ParsingHelpers.tryParseInteger(parameters.get(0), "passenger capacity");
-        pricePerKilometer = ParsingHelpers.tryParseDouble(parameters.get(1), "price");
+    @Override
+    protected void parseParameters(List<String> parameters) {
+        super.parseParameters(parameters);
         cartsCount = ParsingHelpers.tryParseInteger(parameters.get(2), "carts");
     }
 

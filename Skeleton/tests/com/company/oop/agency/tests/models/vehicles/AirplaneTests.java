@@ -1,7 +1,7 @@
 package com.company.oop.agency.tests.models.vehicles;
 
 import com.company.oop.agency.models.vehicles.AirplaneImpl;
-import com.company.oop.agency.models.vehicles.VehicleType;
+import com.company.oop.agency.models.vehicles.enums.VehicleType;
 import com.company.oop.agency.models.vehicles.contracts.Airplane;
 import com.company.oop.agency.models.vehicles.contracts.Vehicle;
 import org.junit.jupiter.api.Assertions;

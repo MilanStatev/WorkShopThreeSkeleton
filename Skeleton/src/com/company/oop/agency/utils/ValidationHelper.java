@@ -22,5 +22,4 @@ public class ValidationHelper {
             throw new IllegalArgumentException(String.format(INVALID_NUMBER_OF_ARGUMENTS, expectedArgumentsCount, list.size()));
         }
     }
-
-}
+ }
